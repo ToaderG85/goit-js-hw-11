@@ -1,4 +1,4 @@
-import api from "./pic-api.js";
+import picApi from "./pic-api.js";
 import Notiflix from 'notiflix'; 
 import throttle from 'lodash.throttle';
 import SimpleLightbox from "simplelightbox";
@@ -32,7 +32,7 @@ async function onSubmit(e) {
     inputValue = form.elements.searchQuery.value;
   
     try {
-      const result = await api.getImages(inputValue, page, perPage);
+      const result = await picApi.getImages(inputValue, page, perPage);
       const images = result.hits;
       totalHits = result.totalHits;
   
@@ -130,7 +130,7 @@ async function onSubmit(e) {
         }
         try {           
             page++;
-            const result = await api.getImages(inputValue, page, perPage);
+            const result = await picApi.getImages(inputValue, page, perPage);
             const images = result.hits;             
             const markup = images.reduce((markup, image) => 
             createMarkup(image) + markup, '');  
