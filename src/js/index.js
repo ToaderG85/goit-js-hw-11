@@ -1,4 +1,4 @@
-import api from "./api.js"
+import api from "./pic-api.js";
 import Notiflix from 'notiflix'; 
 import throttle from 'lodash.throttle';
 import SimpleLightbox from "simplelightbox";
