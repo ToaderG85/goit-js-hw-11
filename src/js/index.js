@@ -1,4 +1,4 @@
-import picApi from "./pic-api.js";
+// import picApi from "./pic-api.js";
 import Notiflix from 'notiflix'; 
 import throttle from 'lodash.throttle';
 import SimpleLightbox from "simplelightbox";
@@ -13,7 +13,22 @@ const lightbox = new SimpleLightbox('.gallery a', {
     captionDelay: 250,
 })
 
+const ENDPOINT = 'https://pixabay.com/api/';
+const API_KEY = '38102784-37e9ad2cc652dbc0da2d9323c';
 
+
+async function getImages(query, page, perPage) {
+  try {
+    const response = await fetch(`${ENDPOINT}?key=${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&per_page=${perPage}&page=${page}`);
+    if (!response.ok) {
+        throw new Error(response.status);
+      }
+      return response.json();
+  } catch (error) {
+    console.error;
+    
+  }
+}
 
 let page = 1;
 const perPage = 40;
@@ -32,7 +47,7 @@ async function onSubmit(e) {
     inputValue = form.elements.searchQuery.value;
   
     try {
-      const result = await picApi.getImages(inputValue, page, perPage);
+      const result = await getImages(inputValue, page, perPage);
       const images = result.hits;
       totalHits = result.totalHits;
   
@@ -130,7 +145,7 @@ async function onSubmit(e) {
         }
         try {           
             page++;
-            const result = await picApi.getImages(inputValue, page, perPage);
+            const result = await getImages(inputValue, page, perPage);
             const images = result.hits;             
             const markup = images.reduce((markup, image) => 
             createMarkup(image) + markup, '');  
