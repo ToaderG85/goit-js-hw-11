@@ -5,7 +5,7 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const form = document.querySelector("#search-form");
-const loadMoreBtn = document.querySelector(".load-more");
+// const loadMoreBtn = document.querySelector(".load-more");
 const gallery = document.querySelector(".gallery");
 
 const lightbox = new SimpleLightbox('.gallery a', { 
@@ -25,7 +25,7 @@ form.addEventListener("submit", onSubmit);
 async function onSubmit(e) {
     e.preventDefault();
     page = 1;
-    loadMoreBtn.classList.add("hidden");
+    // loadMoreBtn.classList.add("hidden");
     gallery.innerHTML = "";
   
     const form = e.currentTarget;
